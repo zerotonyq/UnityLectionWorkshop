@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -5,7 +9,7 @@ public class Slider : ExecutableBehaviour
 {
     [SerializeField] private Vector3 startPosition;
     [SerializeField] private Vector3 endPosition;
-    [SerializeField] private float time;
+    [SerializeField] private float time = 1f;
     private float _remainingTime = 0f;
     private void FixedUpdate()
     {
@@ -24,6 +28,11 @@ public class Slider : ExecutableBehaviour
         }
     }
 
+    public void ChangePositions(Vector3 start, Vector3 end)
+    {
+        startPosition = start;
+        endPosition = end;
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawSphere(startPosition, 0.1f);

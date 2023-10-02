@@ -1,16 +1,20 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [DisallowMultipleComponent]
 public class Mover : ExecutableBehaviour
 {
-    private Vector3 _currentDirection;
+    [SerializeField]
+    private Vector3 currentDirection;
+    [SerializeField, Range(0,2f)]
+    private float speedModifier = 0.1f;
     private void FixedUpdate()
     {
         if (!IsExecuting)
             return;
-        transform.position += _currentDirection;
+        transform.position += currentDirection * speedModifier;
 
     }
 
-    public void ChangeDirection(Vector3 val) => _currentDirection = val;
+    public void ChangeDirection(Vector3 val) => currentDirection = val;
 }

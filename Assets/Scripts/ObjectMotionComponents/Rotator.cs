@@ -12,8 +12,10 @@ public class Rotator : ExecutableBehaviour
         transform.Rotate(0,0,rotationAnglePerTick);
     }
 
-    public void ChangeRotationAnglePerTick(float val) => rotationAnglePerTick = val;
-    
+    public void InverseDirection(bool p) => rotationAnglePerTick = p ?
+        rotationAnglePerTick *= -1 :
+        rotationAnglePerTick *= 1;   
+
 }
 
 

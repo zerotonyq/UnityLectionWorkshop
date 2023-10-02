@@ -1,11 +1,22 @@
+using System;
 using UnityEngine;
 
-public class RotateController : MonoBehaviour
+
+public class RotateController : BaseController<Rotator>
 {
-    [SerializeField] private Rotator rotator; 
-    private void OnEnable()
+    [SerializeField] private HoldButton holdButton;
+    [SerializeField] private bool inverseDirection;
+    protected override void Awake()
     {
-        
-        rotator.Execute();
+        base.Awake();
+        InheritedExecutable.InverseDirection(inverseDirection);
+        holdButton.PointerDown += RequestExecution;
+        holdButton.PointerUp += RequestStopExecution;
+    }
+
+    protected void OnDestroy()
+    {
+        holdButton.PointerDown -= RequestExecution;
+        holdButton.PointerUp -= RequestStopExecution;
     }
 }
